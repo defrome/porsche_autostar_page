@@ -33,34 +33,82 @@
       }
       a { color: inherit; text-decoration: none; }
 
-      /* ─── HEADER ─────────────────────────────────────────────── */
-      .site-header {
+      .cookie-banner {
         position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 100;
-        height: 60px;
-        padding: 0 36px;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        z-index: 120;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: center;
-        background: rgba(5, 5, 5, 0.88);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--line-subtle);
-        transition: background 300ms ease;
+        gap: 20px;
+        padding: 18px 20px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(5,5,5,0.92);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 18px 60px rgba(0,0,0,0.45);
       }
 
-      .brand {
+      .cookie-banner[hidden] { display: none; }
+
+      .cookie-copy {
+        max-width: 760px;
+      }
+
+      .cookie-title {
+        margin: 0 0 6px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+      }
+
+      .cookie-text {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--text-soft);
+      }
+
+      .cookie-actions {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        flex-shrink: 0;
       }
 
-      /* Porsche crest — minimal SVG inline */
-      .brand-crest {
-        width: 22px;
-        height: 22px;
-        opacity: 0.85;
+      .cookie-btn {
+        border: 1px solid rgba(255,255,255,0.18);
+        background: transparent;
+        color: #fff;
+        padding: 12px 18px;
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+      }
+
+      .cookie-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .cookie-btn.primary {
+        background: #fff;
+        color: #050505;
+        border-color: #fff;
+      }
+
+      .cookie-btn.primary:hover {
+        background: rgba(255,255,255,0.88);
+      }
+
+      .cookie-btn.secondary:hover {
+        border-color: rgba(255,255,255,0.45);
       }
 
       .brand-mark {
@@ -69,40 +117,6 @@
         font-weight: 400;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-      }
-
-      .phone {
-        font-size: 11px;
-        font-weight: 300;
-        color: var(--text-muted);
-        letter-spacing: 0.06em;
-        transition: color 180ms ease;
-      }
-      .phone:hover { color: #fff; }
-
-      .book-btn {
-        border: 1px solid rgba(255,255,255,0.22);
-        border-radius: 0;
-        padding: 10px 22px;
-        background: transparent;
-        color: #fff;
-        font-family: "Inter", sans-serif;
-        font-size: 11px;
-        font-weight: 500;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: background 180ms ease, border-color 180ms ease;
-      }
-      .book-btn:hover {
-        background: rgba(255,255,255,0.07);
-        border-color: rgba(255,255,255,0.5);
       }
 
       /* ─── HERO ───────────────────────────────────────────────── */
@@ -146,32 +160,26 @@
         pointer-events: none;
       }
 
+      .hero-center-art {
+        position: absolute;
+        left: 50%;
+        top: 39%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: min(72vw, 980px);
+        max-width: 50%;
+        height: auto;
+        opacity: 0.4;
+        display: block;
+        pointer-events: none;
+        user-select: none;
+      }
+
       .hero-content {
         position: relative;
-        z-index: 2;
+        z-index: 3;
         padding: 0 64px 80px;
         max-width: 600px;
-      }
-
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 32px;
-      }
-
-      .hero-badge-line {
-        width: 28px;
-        height: 1px;
-        background: rgba(255,255,255,0.5);
-      }
-
-      .hero-badge-text {
-        font-size: 10px;
-        font-weight: 400;
-        letter-spacing: 0.38em;
-        text-transform: uppercase;
-        color: var(--text-soft);
       }
 
       .hero-title {
@@ -572,6 +580,7 @@
         font-weight: 300;
         line-height: 0.9;
         color: #fff;
+        white-space: pre-line;
         transition: opacity 320ms ease, transform 420ms cubic-bezier(0.19,1,0.22,1);
       }
 
@@ -819,11 +828,31 @@
 
       /* ─── RESPONSIVE ─────────────────────────────────────────── */
       @media (max-width: 960px) {
-        .site-header { padding: 0 20px; height: 56px; }
-
         .hero-content { padding: 0 24px 56px; max-width: 100%; }
         .hero-title { font-size: 52px; }
         .hero-actions { flex-wrap: wrap; }
+        .hero-center-art {
+          top: 39%;
+          width: min(90vw, 560px);
+          opacity: 0.5;
+        }
+
+        .cookie-banner {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          padding: 16px;
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .cookie-actions {
+          width: 100%;
+        }
+
+        .cookie-btn {
+          flex: 1;
+        }
 
         .stats-inner { padding: 0 24px; gap: 40px; }
         .stats-quote { font-size: 30px; }
@@ -869,23 +898,16 @@
     </style>
   </head>
   <body>
-
-    <!-- ─── HEADER ───────────────────────────────────────── -->
-    <header class="site-header">
-      <div class="brand">
-        <!-- Porsche shield SVG (simplified) -->
-        <svg class="brand-crest" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M11 1L20 5.5V11C20 16 11 21 11 21C11 21 2 16 2 11V5.5L11 1Z" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/>
-          <path d="M11 1V21" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-          <path d="M2 11H20" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-        </svg>
-        <span class="brand-mark">Porsche</span>
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Согласие на cookies">
+      <div class="cookie-copy">
+        <p class="cookie-title">Согласие на cookies</p>
+        <p class="cookie-text">Визуальная заглушка для демонстрации согласия на cookie. Никакие данные не сохраняются.</p>
       </div>
-      <div class="header-actions">
-        <a class="phone" href="tel:+74951234567">+7 495 123-45-67</a>
-        <button class="book-btn" type="button">Записаться</button>
+      <div class="cookie-actions">
+        <button class="cookie-btn secondary" id="cookieReject" type="button">Отклонить</button>
+        <button class="cookie-btn primary" id="cookieAccept" type="button">Согласиться</button>
       </div>
-    </header>
+    </div>
 
     <!-- ─── HERO ─────────────────────────────────────────── -->
     <section class="hero">
@@ -894,11 +916,12 @@
         src="./main_landing_page.png"
         alt="Porsche в студийном освещении"
       />
+      <img
+        class="hero-center-art"
+        src="./porsche_service_text.png"
+        alt="Porsche Service"
+      />
       <div class="hero-content">
-        <div class="hero-badge">
-          <span class="hero-badge-line" aria-hidden="true"></span>
-          <span class="hero-badge-text">Премиальный автосервис</span>
-        </div>
         <h1 class="hero-title">
           Без<br>
           <em>компромиссов</em><br>
@@ -978,7 +1001,8 @@
 
       <div class="car-info">
         <p class="car-eyebrow">Выбор вашего авто</p>
-        <h2 class="car-model-title" id="carTitle">Porsche Taycan</h2>
+        <h2 class="car-model-title" id="carTitle">Porsche
+Taycan</h2>
         <p class="car-model-subtitle" id="carSubtitle">Электро · Полный привод</p>
 
         <div class="car-divider"></div>
@@ -1061,9 +1085,31 @@
 
     <!-- ─── JS ────────────────────────────────────────────── -->
     <script>
+      const cookieBanner = document.getElementById("cookieBanner");
+      const cookieAccept = document.getElementById("cookieAccept");
+      const cookieReject = document.getElementById("cookieReject");
+
+      const hideCookieBanner = () => {
+        cookieBanner?.setAttribute("hidden", "");
+        window.autostarCookieChoice = null;
+      };
+
+      const acceptCookies = () => {
+        window.autostarCookieChoice = "accepted";
+        hideCookieBanner();
+      };
+
+      const rejectCookies = () => {
+        window.autostarCookieChoice = "rejected";
+        hideCookieBanner();
+      };
+
+      cookieAccept?.addEventListener("click", acceptCookies);
+      cookieReject?.addEventListener("click", rejectCookies);
+
       const modelMap = {
         taycan: {
-          title:    "Porsche Taycan",
+          title:    "Porsche\nTaycan",
           subtitle: "Электро · Полный привод",
           features: [
             "Диагностика электропривода",
